@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+
+  "name": "VK player",
+  "description": "This extension give to easy listen music from vk",
+  "version": "0.0.1",
+  "author": "Matsitsky S.S.",
+  "minimum_chrome_version": "48",
+  "browser_action": {
+    "default_icon": "images.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "activeTab",
+    "https://oauth.vk.com/",
+    "https://api.vk.com/",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

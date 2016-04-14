@@ -6,10 +6,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, "src"),
-  entry: "./index.js",
+  entry: {
+    background: "./background.js",
+  },
   output: {
     path: path.join(__dirname, "build"),
-    filename: "index.js",
+    filename: "[name].js",
   },
   devtool: "source-map",
   module: {
@@ -19,14 +21,16 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ['es2015']
-        }
-      }
-    ]
+          presets: ['es2015'],
+        },
+      },
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: "manifest.json" },
+      { from: "*.json" },
+      { from: "*.png" },
+      { from: "*.html" },
     ]),
   ],
 };
