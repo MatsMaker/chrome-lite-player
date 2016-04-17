@@ -1,4 +1,1 @@
-import Backbone from 'backbone';
-import Oauth from './Oauth';
-
-console.log(Oauth);
+console.log('s');

@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   context: path.join(__dirname, "src"),
   entry: {
+    popup: "./popup.js",
     background: "./background.js",
   },
   output: {
@@ -17,12 +18,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js|jsx?$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
-        query: {
-          presets: ['es2015'],
-        },
       },
     ],
   },
