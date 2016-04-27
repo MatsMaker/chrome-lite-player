@@ -12,11 +12,10 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["background.js"]
+    "page": "background.html"
   },
   "permissions": [
     "https://w.soundcloud.com/*",
     "https://soundcloud.com/*"
-  ],
-  "content_security_policy": "script-src 'self' https://w.soundcloud.com/player/api.js; object-src 'self'"
+  ]
 }

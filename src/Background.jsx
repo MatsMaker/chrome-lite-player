@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-require("./popup.css");
+const sc = require('./soundcloud-player-api.js');
+import Reductor from './Reductor.js';
 
-class Player extends Component {
+class SCIframePlayer extends Component {
 
   static propTypes = {
     urlAPI: React.PropTypes.string,
@@ -16,7 +17,16 @@ class Player extends Component {
   componentDidMount() {
     const node = this.refs.iframe;
     const iframe = document.querySelector('iframe');
-    window.SC.Widget(node.id);
+    const SCplayer = SC.Widget(node.id);
+    setTimeout(() => {
+      const reductor = new Reductor({
+        play: () => { SCplayer.play() },
+        pause: () => { SCplayer.pause() },
+        toggle: () => { SCplayer.toggle() },
+        next: () => { SCplayer.next() },
+        prev: () => { SCplayer.prev() },
+      });
+    }, 1000);
   };
 
   getQueryAPIURL = (queryURL) => {
@@ -27,7 +37,6 @@ class Player extends Component {
 
   render() {
     const queryURL = this.getQueryAPIURL(this.props.src);
-    console.log(queryURL);
     return (
       <iframe
         ref="iframe"
@@ -42,4 +51,4 @@ class Player extends Component {
   };
 }
 
-export default Player;
+export default SCIframePlayer;

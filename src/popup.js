@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Player from './Player.jsx';
+import Popup from './Popup.jsx';
 
-ReactDOM.render(<Player />, document.getElementById('app'));
+ReactDOM.render(<Popup />, document.getElementById('popup'));
