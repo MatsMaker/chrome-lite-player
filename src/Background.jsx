@@ -15,24 +15,28 @@ class SCIframePlayer extends Component {
   };
 
   componentDidMount() {
+    const self = this;
     const node = this.refs.iframe;
     const iframe = document.querySelector('iframe');
     const SCplayer = SC.Widget(node.id);
-    setTimeout(() => {
-      const reductor = new Reductor({
-        play: () => { SCplayer.play() },
-        pause: () => { SCplayer.pause() },
-        toggle: () => { SCplayer.toggle() },
-        setVolume: (volume) => { SCplayer.setVolume(volume) },
-        next: () => { SCplayer.next() },
-        prev: () => { SCplayer.prev() },
-      });
-    }, 1000);
-    setTimeout(() => {
-      SCplayer.getVolume((data) => { console.log('start: ', data) });
-      SCplayer.setVolume(100);
-      SCplayer.getVolume((data) => { console.log('finish: ', data) });
-    }, 5000)
+    // TODO make corectly init time
+    const reductor = new Reductor(chrome).mountService(SCplayer);
+    self.setState({
+      reductor: reductor,
+    });
+
+    // TODO fix change sound value
+    // setTimeout(() => {
+    //   SCplayer.getSounds((data) => {console.log('saund: ', data);})
+    //   SCplayer.getVolume((data) => { console.log('start: ', data) });
+    //   SCplayer.setVolume(100);
+    //   SCplayer.getVolume((data) => { console.log('finish: ', data) });
+    // }, 5000)
+
+  };
+
+  afterInit = () => {
+    const { reductor } = this.state;
   };
 
   getQueryAPIURL = (queryURL) => {

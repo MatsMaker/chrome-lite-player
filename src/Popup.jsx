@@ -7,7 +7,10 @@ require("./popup.css");
 class Popup extends Component {
 
   componentWillMount() {
-    const reductor = new Reductor();
+    const reductor = new Reductor(chrome).mountClient({
+      gotSounds: (sounds) => { console.log(sounds) },
+    });
+    reductor.get.sounds();
     this.setState({
       reductor: reductor,
     });
