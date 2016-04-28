@@ -18,9 +18,13 @@ class Popup extends Component {
     return () => { reductor.methods[eventName](); };
   };
 
+  onSetVolume = () => {
+    const { reductor } = this.state;
+    return () => { reductor.methods.setVolume(1); };
+  }
 
   render() {
-    const { onEvent } = this;
+    const { onEvent, onSetVolume } = this;
     return (
       <div>
         <UIPlayer
@@ -29,6 +33,7 @@ class Popup extends Component {
           onToggle={onEvent('toggle')}
           onNext={onEvent('next')}
           onPrev={onEvent('prev')}
+          onSetVolume={onSetVolume()}
         />
       </div>
     );

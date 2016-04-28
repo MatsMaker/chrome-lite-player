@@ -7,17 +7,24 @@ class Popup extends Component {
     onToggle: PropTypes.func,
     onNext: PropTypes.func,
     onPrev: PropTypes.func,
+    onSetVolume: PropTypes.func,
   }
 
   render() {
-    const { onPlay, onPause, onToggle, onNext, onPrev } = this.props;
+    const { onPlay, onPause, onToggle, onNext, onPrev, onSetVolume } = this.props;
     return (
       <div className="control-group">
-        <div onClick={onPlay}>[>]</div>
-        <div onClick={onPause}>[||]</div>
-        <div onClick={onToggle}>[>/||]</div>
-        <div onClick={onNext}>[{">>"}]</div>
-        <div onClick={onPrev}>[{"<<"}]</div>
+        <input type="range" min="0" max="100" step="1" defaultValue="50" />
+        <div>
+          <span onClick={onPlay}>[>]</span>
+          <span onClick={onToggle}>_[>/||]_</span>
+          <span onClick={onPause}>[||]</span>
+        </div>
+        <div>
+          <span onClick={onPrev}>[{"<<"}]</span>
+          <span onClick={onNext}>_[{">>"}]</span>
+        </div>
+        <div onClick={onSetVolume}>volume down</div>
       </div>
     );
   };

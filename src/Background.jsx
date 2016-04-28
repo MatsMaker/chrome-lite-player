@@ -23,10 +23,16 @@ class SCIframePlayer extends Component {
         play: () => { SCplayer.play() },
         pause: () => { SCplayer.pause() },
         toggle: () => { SCplayer.toggle() },
+        setVolume: (volume) => { SCplayer.setVolume(volume) },
         next: () => { SCplayer.next() },
         prev: () => { SCplayer.prev() },
       });
     }, 1000);
+    setTimeout(() => {
+      SCplayer.getVolume((data) => { console.log('start: ', data) });
+      SCplayer.setVolume(100);
+      SCplayer.getVolume((data) => { console.log('finish: ', data) });
+    }, 5000)
   };
 
   getQueryAPIURL = (queryURL) => {

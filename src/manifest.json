@@ -8,7 +8,7 @@
   "minimum_chrome_version": "48",
   "browser_action": {
     "default_title": "lite player",
-    "default_icon": "images.png",
+    "default_icon": "img/mp3-player-icon-x48.png",
     "default_popup": "popup.html"
   },
   "background": {
@@ -17,5 +17,10 @@
   "permissions": [
     "https://w.soundcloud.com/*",
     "https://soundcloud.com/*"
-  ]
+  ],
+  "icons": {
+    "16": "img/mp3-player-icon-x16.png",
+    "48": "img/mp3-player-icon-x48.png",
+    "128": "img/mp3-player-icon-x128.png"
+  }
 }

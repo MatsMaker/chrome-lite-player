@@ -8,16 +8,18 @@ class Reductor {
       self._gotMessage.bind(this)(message, sender, sendResponse);
     });
     self.methods = {
-      play: () => self.sendMessage('play'),
-      pause: () => self.sendMessage('pause'),
-      toggle: () => self.sendMessage('toggle'),
-      next: () => self.sendMessage('next'),
-      prev: () => self.sendMessage('prev'),
+      play: () => self.sendMessage({key: 'play'}),
+      pause: () => self.sendMessage({key: 'pause'}),
+      toggle: () => self.sendMessage({key: 'toggle'}),
+      setVolume: (value) => self.sendMessage({key: 'setVolume', value: value}),
+      next: () => self.sendMessage({key: 'next'}),
+      prev: () => self.sendMessage({key: 'prev'}),
     };
     self.cbMethods = {
       play: cbMethods.play || fakeFn,
       pause: cbMethods.pause || fakeFn,
       toggle: cbMethods.toggle || fakeFn,
+      setVolume: cbMethods.setVolume || fakeFn,
       next: cbMethods.next || fakeFn,
       prev: cbMethods.prev || fakeFn,
     };
@@ -25,7 +27,7 @@ class Reductor {
 
   _gotMessage(message, sender, sendResponse) {
     const self = this;
-    switch (message) {
+    switch (message.key) {
       case 'play':
         self.cbMethods.play();
         break;
@@ -34,6 +36,9 @@ class Reductor {
         break;
       case 'toggle':
         self.cbMethods.toggle();
+        break;
+      case 'setVolume':
+        self.cbMethods.setVolume(message.value);
         break;
       case 'next':
         self.cbMethods.next();
@@ -48,7 +53,6 @@ class Reductor {
 
   sendMessage(message, callback) {
     const self = this;
-    console.log(self.appId);
     chrome.runtime.sendMessage(self.appId, message, callback);
   }
 
