@@ -1,7 +1,47 @@
 body {
   margin: 0;
   padding: 5px;
+  background-color: #000000;
+  color: #ffffff;
 }
 iframe {
   border: none;
+}
+
+/* player */
+.player-wrap {
+  width: 350px;
+  position: relative;
+}
+.control-group {
+  position: fixed;
+  width: 100px;
+  height: auto;
+  right: 0;
+  top: 0;
+}
+.sounds-list-wrap {
+  width: 248px;
+}
+.sound-list {
+  list-style: none;
+  padding-left: 0;
+}
+.sound-item {
+  margin-bottom: 5px;
+}
+.preview-img,
+.sound-title {
+  vertical-align: middle;
+  display: inline-block;
+}
+.preview-img {
+  width: 48px;
+  height: 48px;
+  background-repeat: no-repeat;
+}
+.sound-title {
+  padding-left: 15px;
+  width: 184px;
+  box-sizing: border-box;
 }

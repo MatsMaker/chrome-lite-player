@@ -7,8 +7,13 @@ require("./popup.css");
 class Popup extends Component {
 
   componentWillMount() {
+    const self = this;
     const reductor = new Reductor(chrome).mountClient({
-      gotSounds: (sounds) => { console.log(sounds) },
+      gotSounds: (sounds) => {
+        self.setState({
+          sounds: sounds,
+        });
+      },
     });
     reductor.get.sounds();
     this.setState({
@@ -28,9 +33,11 @@ class Popup extends Component {
 
   render() {
     const { onEvent, onSetVolume } = this;
+    const sounds = this.state.sounds || [];
     return (
       <div>
         <UIPlayer
+          sounds={sounds}
           onPlay={onEvent('play')}
           onPause={onEvent('pause')}
           onToggle={onEvent('toggle')}

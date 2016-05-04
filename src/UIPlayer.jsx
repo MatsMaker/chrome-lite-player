@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import SoundsList from './SoundsList.jsx';
 
 class Popup extends Component {
   static propTypes = {
@@ -8,13 +9,15 @@ class Popup extends Component {
     onNext: PropTypes.func,
     onPrev: PropTypes.func,
     onSetVolume: PropTypes.func,
+    sounds: PropTypes.array,
   }
 
   render() {
-    const { onPlay, onPause, onToggle, onNext, onPrev, onSetVolume } = this.props;
+    const { onPlay, onPause, onToggle, onNext, onPrev, onSetVolume,
+    sounds } = this.props;
     return (
+      <div className="player-wrap">
       <div className="control-group">
-        <input type="range" min="0" max="100" step="1" defaultValue="50" />
         <div>
           <span onClick={onPlay}>[>]</span>
           <span onClick={onToggle}>_[>/||]_</span>
@@ -24,7 +27,12 @@ class Popup extends Component {
           <span onClick={onPrev}>[{"<<"}]</span>
           <span onClick={onNext}>_[{">>"}]</span>
         </div>
-        <div onClick={onSetVolume}>volume down</div>
+      </div>
+        <div className="sounds-list-wrap">
+          <SoundsList
+            sounds={sounds}
+          />
+        </div>
       </div>
     );
   };
