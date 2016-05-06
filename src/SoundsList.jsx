@@ -1,19 +1,25 @@
 import React, { Component, PropTypes } from 'react';
+import ClassNames from 'classnames';
 
 class SoundsList extends Component {
   static propTypes = {
     sounds: PropTypes.array,
+    currentSound: PropTypes.object,
   }
 
-  renderSoundItem(sound, index) {
+  renderSoundItem = (sound, index) => {
+    const { currentSound } = this.props;
     const style = {
       backgroundImage: "url(" + sound.artwork_url + ")",
     };
-
+    const className = ClassNames({
+      'sound-item': true,
+      active: sound.id === currentSound.id,
+    });
     return (
       <li
           key={index}
-          className="sound-item"
+          className={className}
         >
         <div className="preview-img"
           style={style} />

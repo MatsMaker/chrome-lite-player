@@ -8,6 +8,27 @@ iframe {
   border: none;
 }
 
+.button {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  padding: 3px;
+  box-shadow: 0 0 2px 0px inset;
+}
+.button:active {
+  background: coral;
+}
+.button.active {
+  background: coral;
+}
+.button-group>.button:not(:first-child){
+  margin-left: 3px;
+}
 /* player */
 .player-wrap {
   width: 350px;
@@ -17,8 +38,13 @@ iframe {
   position: fixed;
   width: 100px;
   height: auto;
+  right: 15px;
+  top: 15px;
+}
+.control-group .button-group{
+  position: absolute;
+  display: inline-block;
   right: 0;
-  top: 0;
 }
 .sounds-list-wrap {
   width: 248px;
@@ -29,6 +55,9 @@ iframe {
 }
 .sound-item {
   margin-bottom: 5px;
+}
+.sound-item.active {
+  background-color: blue;
 }
 .preview-img,
 .sound-title {

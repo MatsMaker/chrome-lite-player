@@ -1,9 +1,14 @@
 class Reductor {
 
-  constructor(chrome) {
-    this.appId = chrome.app.getDetails().id;
-    this.chrome = chrome;
-    return this;
+  constructor(chrome, senderFile) {
+    const self = this;
+    self.appId = chrome.app.getDetails().id;
+    self.chrome = chrome;
+    self.sender = {
+      file: senderFile,
+      url: 'chrome-extension://' + self.appId + '/' + senderFile,
+    }
+    return self;
   }
 
   _isMounted() {
@@ -67,6 +72,7 @@ class Reductor {
       next: cbMethods.next || self.fakeFn,
       prev: cbMethods.prev || self.fakeFn,
       gotSounds: cbMethods.gotSounds || self.fakeFn,
+      gotCurrentSound: cbMethods.gotCurrentSound || self.fakeFn,
       other: cbMethods.other || self.fakeFn,
     };
 
@@ -99,9 +105,13 @@ class Reductor {
       case 'getSounds':
         self.SCplayer.getSounds(self.gotSounds)
         break;
+      case 'getCurrentSound':
+        self.SCplayer.getCurrentSound(self.gotCurrentSound)
+        break;
       default:
         self.cbMethods.other();
     }
+    return true;
   }
 
   gotSounds = (sounds) => {
@@ -109,15 +119,27 @@ class Reductor {
     self.sendMessage({key: 'gotSounds', value: sounds});
   }
 
+  gotCurrentSound = (sound) => {
+    const self = this;
+    self.sendMessage({key: 'gotCurrentSound', value: sound});
+  }
+
   _gotMessageClient(message, sender, sendResponse) {
     const self = this;
+    if (sender.url === self.sender.url) {
+      return false;
+    }
     switch (message.key) {
       case 'gotSounds':
         self.cbMethods.gotSounds(message.value);
         break;
+      case 'gotCurrentSound':
+        self.cbMethods.gotCurrentSound(message.value);
+        break;
       default:
         self.cbMethods.other();
     }
+    return true;
   }
 
   sendMessage = (message, callback) => {

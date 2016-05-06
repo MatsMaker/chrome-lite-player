@@ -20,7 +20,7 @@ class SCIframePlayer extends Component {
     const iframe = document.querySelector('iframe');
     const SCplayer = SC.Widget(node.id);
     // TODO make corectly init time
-    const reductor = new Reductor(chrome).mountService(SCplayer);
+    const reductor = new Reductor(chrome, 'background.html').mountService(SCplayer);
     self.setState({
       reductor: reductor,
     });
